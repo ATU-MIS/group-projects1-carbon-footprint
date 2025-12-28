@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    actor User as Actor (Guest/Registered)
+    participant UI as System Interface
+    participant DB as Database
+
+    Note over User, UI: 3. Use Case: Calculate Carbon Footprint
+
+    User->>UI: Hesaplama Sayfasını Aç
+    UI-->>User: Veri Giriş Formunu Göster
+    
+    User->>UI: Verileri Gir (Ulaşım, Elektrik, Gıda vb.)
+    User->>UI: Formu Gönder (Submit)
+
+    alt Eksik veya Hatalı Veri
+        UI-->>User: Doğrulama Hatası Göster
+        User->>UI: Verileri Düzelt ve Tekrar Gönder
+    else Veriler Geçerli
+        UI->>UI: Emisyon Faktörlerini Getir
+        UI->>UI: Toplam CO2 Hesapla
+        UI-->>User: Ayak İzi Sonucunu Göster
+
+        opt Kullanıcı Kayıtlı İse (Registered User)
+            UI->>DB: Sonucu Geçmişe Kaydet
+            DB-->>UI: Kayıt Başarılı Onayı
+        end
+    end
