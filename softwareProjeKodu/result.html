@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hesaplama Sonucu - GREEN TRAILBLAZER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "eco-green": "#10b981",
+              "forest-green": "#059669",
+              "light-gray": "#f4f4f5",
+              "carbon-blue": "#3b82f6",
+              "alert-red": "#ef4444",
+              "warning-yellow": "#f59e0b",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      .blur-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("./arkaplan.jpg.jpeg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px);
+        z-index: -1;
+        transform: scale(1.02);
+      }
+
+      @keyframes popIn {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .result-circle {
+        animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+    </style>
+  </head>
+  <body class="font-sans text-gray-800 min-h-screen relative flex flex-col">
+    <div class="blur-bg"></div>
+    <div class="fixed inset-0 bg-black bg-opacity-40 z-0"></div>
+
+    <nav
+      class="relative z-20 px-6 py-4 flex justify-between items-center text-white"
+    >
+      <a
+        href="index.html"
+        class="flex items-center space-x-2 text-xl font-bold"
+      >
+        <i class="fas fa-leaf"></i> <span>GREEN TRAILBLAZER</span>
+      </a>
+    </nav>
+
+    <main
+      class="relative z-10 container mx-auto px-4 py-4 flex-grow flex items-center justify-center"
+    >
+      <div
+        class="w-full max-w-4xl bg-white bg-opacity-95 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row"
+      >
+        <div
+          class="md:w-5/12 bg-gradient-to-br from-eco-green to-forest-green p-8 text-white flex flex-col items-center justify-center text-center relative"
+        >
+          <h2 class="text-xl font-semibold mb-6 opacity-90">
+            Yıllık Karbon Ayak İziniz
+          </h2>
+
+          <div
+            class="result-circle w-48 h-48 rounded-full border-8 border-white border-opacity-30 flex flex-col items-center justify-center bg-white bg-opacity-10 mb-6 shadow-lg"
+          >
+            <span id="score-display" class="text-5xl font-extrabold">...</span>
+            <span class="text-lg font-medium opacity-80">Ton CO₂e</span>
+          </div>
+
+          <div class="bg-white bg-opacity-20 rounded-lg py-2 px-4 mb-6">
+            <i class="fas fa-chart-line mr-2"></i> Analiz Tamamlandı
+          </div>
+
+          <p class="text-sm opacity-80 leading-relaxed px-4">
+            Bu sonuç, verdiğiniz cevaplara göre hesaplanmış tahmini yıllık
+            karbon salınımınızdır.
+          </p>
+        </div>
+
+        <div class="md:w-7/12 p-8 md:p-10">
+          <div class="flex justify-between items-end mb-6">
+            <h3 class="text-2xl font-bold text-gray-800">Emisyon Dağılımı</h3>
+            <span
+              class="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded"
+              >2025 Verisi</span
+            >
+          </div>
+
+          <div
+            id="comparison-badge"
+            class="bg-gray-100 rounded-lg py-3 px-4 mb-8 flex items-center transition-colors duration-500"
+          >
+            <i
+              id="comparison-icon"
+              class="fas fa-circle-notch fa-spin mr-3 text-xl"
+            ></i>
+            <div>
+              <h4 id="comparison-title" class="font-bold text-gray-700">
+                Analiz Ediliyor...
+              </h4>
+              <p id="comparison-text" class="text-sm text-gray-600">
+                Veriler işleniyor, lütfen bekleyin.
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-6 mb-8">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-semibold text-gray-600"
+                  ><i class="fas fa-car mr-2"></i>Ulaşım</span
+                >
+                <span id="val-transport" class="font-bold text-gray-800"
+                  >0 Ton</span
+                >
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  id="bar-transport"
+                  class="bg-carbon-blue h-3 rounded-full transition-all duration-1000"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-semibold text-gray-600"
+                  ><i class="fas fa-bolt mr-2"></i>Elektrik & Su</span
+                >
+                <span id="val-energy" class="font-bold text-gray-800"
+                  >0 Ton</span
+                >
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  id="bar-energy"
+                  class="bg-warning-yellow h-3 rounded-full transition-all duration-1000"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-semibold text-gray-600"
+                  ><i class="fas fa-utensils mr-2"></i>Gıda</span
+                >
+                <span id="val-food" class="font-bold text-gray-800">0 Ton</span>
+              </div>
+              <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                <div
+                  id="bar-food"
+                  class="bg-alert-red h-3 rounded-full transition-all duration-1000"
+                  style="width: 0%"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex space-x-4 mt-8">
+            <a
+              href="dashboard.html"
+              class="flex-1 bg-eco-green hover:bg-forest-green text-white text-center py-3 rounded-xl font-bold shadow-md transition transform hover:-translate-y-1"
+            >
+              <i class="fas fa-home mr-2"></i> Panele Dön
+            </a>
+            <a
+              href="calculate.html"
+              class="px-4 py-3 border border-gray-300 text-gray-600 rounded-xl hover:bg-gray-50 transition"
+              title="Tekrar Hesapla"
+            >
+              <i class="fas fa-redo-alt"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

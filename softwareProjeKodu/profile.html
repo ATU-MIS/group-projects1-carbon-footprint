@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Ayarları - GREEN TRAILBLAZER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "eco-green": "#10b981",
+              "forest-green": "#059669",
+              "light-gray": "#f4f4f5",
+              "carbon-blue": "#3b82f6",
+              "alert-red": "#ef4444",
+            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      .blur-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("./arkaplan.jpg.jpeg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(6px);
+        z-index: -1;
+        transform: scale(1.02);
+      }
+    </style>
+  </head>
+  <body class="font-sans text-gray-800 min-h-screen relative">
+    <div class="blur-bg"></div>
+    <div class="fixed inset-0 bg-black bg-opacity-40 z-0"></div>
+
+    <nav
+      class="relative z-20 bg-white bg-opacity-90 backdrop-blur-md shadow-sm px-6 py-4 flex justify-between items-center"
+    >
+      <a
+        href="index.html"
+        class="flex items-center space-x-2 text-xl font-bold text-eco-green"
+      >
+        <i class="fas fa-leaf"></i> <span>GREEN TRAILBLAZER</span>
+      </a>
+
+      <div class="flex items-center space-x-4">
+        <span
+          id="nav-fullname"
+          class="text-sm font-semibold text-gray-600 hidden md:inline"
+          >Kullanıcı</span
+        >
+
+        <div
+          class="w-10 h-10 bg-forest-green rounded-full flex items-center justify-center text-white font-bold"
+        >
+          <i class="fas fa-user"></i>
+        </div>
+        <a
+          href="#"
+          id="logoutBtn"
+          class="text-gray-500 hover:text-red-500 transition ml-4"
+          title="Çıkış Yap"
+        >
+          <i class="fas fa-sign-out-alt text-xl"></i>
+        </a>
+      </div>
+    </nav>
+
+    <main class="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+      <h1 class="text-3xl font-bold text-white mb-8 drop-shadow-md">
+        Hesap Ayarları
+      </h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-1 space-y-4">
+          <div
+            class="bg-white bg-opacity-90 backdrop-blur-xl rounded-2xl p-6 shadow-xl text-center border border-white/50"
+          >
+            <div class="relative w-28 h-28 mx-auto mb-4 group cursor-pointer">
+              <div
+                class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center text-4xl text-gray-400 border-4 border-white shadow-sm overflow-hidden"
+              >
+                <i class="fas fa-user"></i>
+              </div>
+            </div>
+
+            <h2 id="card-name" class="text-xl font-bold text-gray-800">...</h2>
+            <p id="card-job" class="text-sm text-gray-500">...</p>
+
+            <p class="text-xs text-eco-green mt-2 font-semibold">
+              <i class="fas fa-check-circle mr-1"></i>Kayıtlı Kullanıcı
+            </p>
+          </div>
+
+          <a
+            href="dashboard.html"
+            class="block bg-carbon-blue hover:bg-blue-600 text-white text-center py-3 rounded-xl shadow-lg transition"
+          >
+            <i class="fas fa-chart-line mr-2"></i> İstatistiklere Dön
+          </a>
+        </div>
+
+        <div class="md:col-span-2 space-y-6">
+          <div
+            class="bg-white bg-opacity-95 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/50"
+          >
+            <div class="flex items-center mb-6 pb-4 border-b border-gray-100">
+              <div
+                class="w-10 h-10 rounded-lg bg-green-100 text-eco-green flex items-center justify-center mr-3"
+              >
+                <i class="fas fa-user-edit"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-800">
+                  Profil Bilgileri
+                </h3>
+                <p class="text-sm text-gray-500">
+                  Kişisel bilgilerinizi güncelleyin.
+                </p>
+              </div>
+            </div>
+
+            <form class="space-y-4" onsubmit="return false;">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1"
+                    >Ad Soyad</label
+                  >
+                  <input
+                    id="inputName"
+                    type="text"
+                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-eco-green outline-none bg-gray-50"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-1"
+                    >Meslek</label
+                  >
+                  <input
+                    id="inputJob"
+                    type="text"
+                    placeholder="Örn: Öğrenci"
+                    class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-eco-green outline-none bg-gray-50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1"
+                  >E-posta Adresi</label
+                >
+                <input
+                  id="inputEmail"
+                  type="email"
+                  disabled
+                  class="w-full p-3 border rounded-lg bg-gray-200 text-gray-500 cursor-not-allowed"
+                />
+              </div>
+
+              <div class="pt-2">
+                <button
+                  id="btnSaveInfo"
+                  type="button"
+                  class="px-6 py-2 bg-eco-green hover:bg-forest-green text-white font-bold rounded-lg transition shadow-md"
+                >
+                  Kaydet
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div
+            class="bg-white bg-opacity-95 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/50"
+          >
+            <div class="flex items-center mb-6 pb-4 border-b border-gray-100">
+              <div
+                class="w-10 h-10 rounded-lg bg-blue-100 text-carbon-blue flex items-center justify-center mr-3"
+              >
+                <i class="fas fa-bullseye"></i>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-gray-800">Karbon Hedefi</h3>
+                <p class="text-sm text-gray-500">
+                  Yıllık düşürmek istediğiniz emisyon hedefi.
+                </p>
+              </div>
+            </div>
+
+            <form class="space-y-4" onsubmit="return false;">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Hedeflenen CO₂ Değeri (Ton/Yıl)</label
+                >
+                <div class="flex items-center space-x-4">
+                  <input
+                    id="inputTarget"
+                    type="number"
+                    step="0.1"
+                    class="w-32 p-3 border rounded-lg focus:ring-2 focus:ring-carbon-blue outline-none bg-gray-50 text-center font-bold text-lg"
+                  />
+                  <span class="text-gray-500 text-sm"
+                    >Türkiye ortalaması: <strong>6.3 Ton</strong></span
+                  >
+                </div>
+                <p class="text-xs text-gray-400 mt-2">
+                  <i class="fas fa-info-circle mr-1"></i> Daha düşük bir hedef
+                  belirlemek sizi motive edebilir.
+                </p>
+              </div>
+
+              <div class="pt-2">
+                <button
+                  id="btnSaveTarget"
+                  type="button"
+                  class="px-6 py-2 bg-carbon-blue hover:bg-blue-600 text-white font-bold rounded-lg transition shadow-md"
+                >
+                  Hedefi Güncelle
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <div
+            class="bg-white bg-opacity-95 backdrop-blur-xl rounded-2xl p-8 shadow-xl border border-white/50"
+          >
+            <h3 class="text-lg font-bold text-gray-800 mb-4">Şifre Değiştir</h3>
+            <form
+              class="grid grid-cols-1 md:grid-cols-2 gap-4"
+              onsubmit="return false;"
+            >
+              <input
+                id="inputPass1"
+                type="password"
+                placeholder="Yeni Şifre"
+                class="p-3 border rounded-lg focus:ring-2 focus:ring-gray-400 outline-none bg-gray-50"
+              />
+              <input
+                id="inputPass2"
+                type="password"
+                placeholder="Yeni Şifre (Tekrar)"
+                class="p-3 border rounded-lg focus:ring-2 focus:ring-gray-400 outline-none bg-gray-50"
+              />
+              <div class="md:col-span-2">
+                <button
+                  id="btnSavePass"
+                  type="button"
+                  class="px-4 py-2 border border-gray-300 text-gray-600 font-semibold rounded-lg hover:bg-gray-100 transition"
+                >
+                  Şifreyi Yenile
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
