@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kayıt Ol - GREEN TRAILBLAZER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { "eco-green": "#10b981", "forest-green": "#059669" },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .login-bg {
+        background-image: url("./arkaplan.jpg.jpeg");
+        background-color: #f3f4f6;
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+  </head>
+  <body
+    class="h-screen w-full flex items-center justify-center login-bg relative"
+  >
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+    <div class="relative z-10 w-full max-w-md px-6">
+      <div
+        class="bg-white bg-opacity-95 backdrop-blur-md rounded-2xl shadow-2xl p-8 border-t-4 border-eco-green"
+      >
+        <div class="text-center mb-6">
+          <h2 class="text-2xl font-bold text-gray-800">Hesap Oluştur</h2>
+          <p class="text-gray-500 text-sm">Gezegeni kurtarmaya bugün başla.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >Ad Soyad</label
+            >
+            <input
+              id="regName"
+              type="text"
+              class="block w-full p-3 border rounded-lg focus:ring-2 focus:ring-eco-green outline-none"
+              placeholder="Adınız"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700"
+              >E-posta</label
+            >
+            <input
+              id="regEmail"
+              type="email"
+              class="block w-full p-3 border rounded-lg focus:ring-2 focus:ring-eco-green outline-none"
+              placeholder="ornek@gmail.com"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Şifre</label>
+            <input
+              id="regPass"
+              type="password"
+              class="block w-full p-3 border rounded-lg focus:ring-2 focus:ring-eco-green outline-none"
+              placeholder="******"
+            />
+          </div>
+
+          <button
+            id="btnKayitOl"
+            class="w-full bg-eco-green hover:bg-forest-green text-white font-bold py-3 rounded-xl shadow-lg transition transform hover:-translate-y-1"
+          >
+            Kayıt Ol
+          </button>
+        </div>
+
+        <div class="mt-6 text-center text-sm text-gray-500">
+          Zaten hesabın var mı?
+          <a href="login.html" class="text-eco-green font-bold hover:underline"
+            >Giriş Yap</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("btnKayitOl")
+        .addEventListener("click", function () {
+          console.log("Kayıt butonuna basıldı...");
+
+          const name = document.getElementById("regName").value;
+          const email = document.getElementById("regEmail").value;
+          const password = document.getElementById("regPass").value;
+
+          if (name === "" || email === "" || password === "") {
+            alert("Lütfen tüm alanları doldurun!");
+            return;
+          }
+
+          const userData = {
+            name: name,
+            password: password,
+          };
+
+          try {
+            localStorage.setItem("user_" + email, JSON.stringify(userData));
+            console.log("Kayıt başarılı, localStorage'a yazıldı.");
+
+            alert("Kayıt Başarılı! Giriş sayfasına yönlendiriliyorsunuz.");
+
+            window.location.href = "login.html";
+          } catch (error) {
+            console.error("Hata oluştu:", error);
+            alert("Bir hata oluştu. Lütfen tarayıcı ayarlarını kontrol edin.");
+          }
+        });
+    </script>
+  </body>
+</html>

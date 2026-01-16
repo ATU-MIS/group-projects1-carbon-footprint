@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hesaplama - GREEN TRAILBLAZER</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "eco-green": "#10b981",
+              "forest-green": "#059669",
+              "carbon-blue": "#3b82f6",
+            },
+            fontFamily: { sans: ["Inter", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <style>
+      .light-blur-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url("./arkaplan.jpg.jpeg");
+        background-size: cover;
+        background-position: center;
+        filter: blur(3px);
+        z-index: -1;
+      }
+
+      #step1,
+      #step2,
+      #step3,
+      #step4 {
+        display: none;
+        animation: fadeIn 0.4s ease-in-out;
+      }
+
+      #step1.active,
+      #step2.active,
+      #step3.active,
+      #step4.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="h-screen w-full flex items-center justify-center overflow-hidden font-sans relative text-gray-800"
+  >
+    <div class="light-blur-bg"></div>
+    <div class="absolute inset-0 bg-black bg-opacity-30 z-0"></div>
+
+    <div class="relative z-10 w-full max-w-2xl p-4">
+      <div
+        class="bg-white bg-opacity-95 backdrop-blur-xl rounded-2xl shadow-2xl p-8 md:p-10 border border-gray-200 min-h-[500px] flex flex-col justify-between"
+      >
+        <div>
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-3xl font-bold text-forest-green">
+              Ayak İzi Hesaplayıcı
+            </h2>
+            <span class="text-sm font-semibold text-gray-500"
+              >Adım <span id="step-number">1</span>/4</span
+            >
+          </div>
+
+          <div class="w-full bg-gray-200 rounded-full h-2.5 mb-8">
+            <div
+              id="progress-bar"
+              class="bg-eco-green h-2.5 rounded-full transition-all duration-300"
+              style="width: 25%"
+            ></div>
+          </div>
+        </div>
+
+        <form id="calculationForm">
+          <div id="step1" class="active">
+            <h3 class="text-xl font-bold mb-4">🚗 Ulaşım</h3>
+            <input
+              id="transport_car"
+              type="number"
+              class="w-full p-3 border rounded-lg mb-3"
+              placeholder="Haftalık araç km"
+            />
+            <input
+              id="transport_public"
+              type="number"
+              class="w-full p-3 border rounded-lg"
+              placeholder="Haftalık toplu taşıma km"
+            />
+          </div>
+
+          <div id="step2">
+            <h3 class="text-xl font-bold mb-4">⚡ Enerji</h3>
+            <input
+              id="electricity"
+              type="number"
+              class="w-full p-3 border rounded-lg mb-3"
+              placeholder="Aylık elektrik (kWh)"
+            />
+            <select id="renewable" class="w-full p-3 border rounded-lg">
+              <option value="no">Yenilenebilir Yok</option>
+              <option value="partial">Kısmen</option>
+              <option value="yes">Tamamen</option>
+            </select>
+          </div>
+
+          <div id="step3">
+            <h3 class="text-xl font-bold mb-4">💧 Su</h3>
+            <input
+              id="water_bill"
+              type="number"
+              class="w-full p-3 border rounded-lg"
+              placeholder="Aylık su faturası (TL)"
+            />
+          </div>
+
+          <div id="step4">
+            <h3 class="text-xl font-bold mb-4">🍽️ Beslenme</h3>
+
+            <label class="block mb-2">
+              <input type="radio" name="food" value="meat" checked /> Et
+              ağırlıklı
+            </label>
+            <label class="block mb-2">
+              <input type="radio" name="food" value="mixed" /> Karışık
+            </label>
+            <label class="block mb-2">
+              <input type="radio" name="food" value="vegetarian" /> Vejetaryen
+            </label>
+            <label class="block">
+              <input type="radio" name="food" value="vegan" /> Vegan
+            </label>
+          </div>
+        </form>
+
+        <div class="flex justify-between mt-8 pt-4 border-t border-gray-100">
+          <button
+            id="prevBtn"
+            class="px-6 py-2 rounded-lg text-gray-500 font-semibold hover:bg-gray-100 transition hidden"
+          >
+            <i class="fas fa-arrow-left mr-2"></i> Geri
+          </button>
+          <button
+            id="nextBtn"
+            class="ml-auto px-8 py-3 bg-eco-green hover:bg-forest-green text-white font-bold rounded-lg shadow-lg transition transform hover:-translate-y-1"
+          >
+            İleri <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a
+          href="dashboard.html"
+          class="text-white text-sm hover:underline opacity-90"
+        >
+          <i class="fas fa-times mr-1"></i> İptal
+        </a>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
